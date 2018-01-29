@@ -14,18 +14,14 @@ public class DeskBootApp
 	
     public static void main(String[] args) 
     {  
-        SpringApplication.run(DeskBootApp.class, args);  
-       //System.out.println( " SpringApplication.runing......" );
-        
+      
+    	SpringApplication.run(DeskBootApp.class, args);  
         
     } 
     public static void FormStarter(String[] args)
     {  
     	      
-    	 main(args); 
-        //SpringApplication.run(DeskSpringBootApp.class, args);  
-       
-        
+    	 main(args);   
         
     }  
 }  

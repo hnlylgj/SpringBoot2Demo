@@ -23,8 +23,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 
-
-
 public class DeskBootForm implements WindowListener,ActionListener,lgjEventListener
 {
 	Frame MyMainForm;
@@ -34,23 +32,13 @@ public class DeskBootForm implements WindowListener,ActionListener,lgjEventListe
     TextField OutInforTextField;
     TextField StatusTextField;
     TextArea OutInforTextArea;
-    TextArea StatusTextArea;
-    
+    TextArea StatusTextArea;    
     
     int mRowCount;
     int mUUidCount=10000;
-    
-    
-    static  String[] Myargs;
-    
-    Thread MySpringBootServiceThread;
-    
-    CountDownLatch Mylatch;
-    
-    int StartFlag;
-    
-    PrintStream Oldout; 
-    
+    static  String[] Myargs;      
+    int StartFlag;    
+    PrintStream Oldout;    
     lgjEventManager MylgjEventManager;
     
     public static void main( String[] args )
@@ -70,19 +58,19 @@ public class DeskBootForm implements WindowListener,ActionListener,lgjEventListe
     }
     public  DeskBootForm() 
    	{
-    	//IPListener="0.0.0.0";//"localhost";//"127.0.0.1";
+    	
     	MyDeskSpringBootFormInit(); 
    	}
     
     public  DeskBootForm(String InIPListener) 
    	{
-    	//IPListener=InIPListener;
+    	
     	MyDeskSpringBootFormInit(); 
    	}
     public  void MyDeskSpringBootFormInit() 
 	{
 		
-		    Frame MyMainForm = new Frame("SpringBoot2调试工具【◆版权所有@李庚君2016-2020◆】");
+		    Frame MyMainForm = new Frame("SpringBoot2调试工具【◆李庚君2016-2020◆】");
 	        StartButton = new Button("Start");//启动
 	        CloseButton = new Button("Close");//关闭
 	        
@@ -97,13 +85,8 @@ public class DeskBootForm implements WindowListener,ActionListener,lgjEventListe
 	        StartButton.addActionListener(this);
 	        CloseButton.setActionCommand("close");
 	        CloseButton.addActionListener(this);
-
 	        	       
-	        //OutInforTextField=new TextField("开始...");          
-	        //StatusTextField=new TextField();        
-	        //OutInforTextField.setForeground(Color.RED);
-	        //StatusTextField.setForeground(Color.green);
-	        
+	      	        
 	        OutInforTextArea=new TextArea("开始......\n"); 
 	        StatusTextArea=new TextArea("就绪......\n");
 	        OutInforTextArea.setForeground(Color.green);
@@ -111,43 +94,38 @@ public class DeskBootForm implements WindowListener,ActionListener,lgjEventListe
 	        StatusTextArea.setForeground(Color.WHITE);
 	        StatusTextArea.setBackground(Color.black);
 	       
-	        //MyMainForm.addWindowListener(new MainFormEventHandler());
-	        MyMainForm.addWindowListener(this);
 	       
+	        MyMainForm.addWindowListener(this);	       
 	        MyMainForm.setLayout(new GridLayout(2,2));
 	        MyMainForm.add(StartButton);
 	        MyMainForm.add(CloseButton);       
 	        MyMainForm.add(OutInforTextArea);
-	        MyMainForm.add(StatusTextArea);	       
+	        MyMainForm.add(StatusTextArea);	     
 
 	        MyMainForm.pack();
 	        MyMainForm.setSize(1200,1000);
 	        MyMainForm.setVisible(true);
 	        
 	        //-----------------------------------------
-	        //MyAccountSQLHelper=new AccountSQLHelper();
 	        mRowCount=0;
 	        StartFlag=0;
-	        MySpringBootServiceThread=null;
-	        //---------------------
-	        
+	       	        
 	         MylgjEventManager=new lgjEventManager();
-	         MylgjEventManager.AddListener(this);//订阅自定义事件
+	         MylgjEventManager.AddListener(this);
 	        
-	        try
+	         try
 		       {  
-		            Oldout = System.out; //保存原来标准输出流 
+		            Oldout = System.out; 
 		            lgjOutputStream MylgjOutputStream=new lgjOutputStream(MylgjEventManager);//传递事件管理对象给自定义输出流
 		            PrintStream Myps = new PrintStream(MylgjOutputStream); 
 		            System.setOut(Myps); 	
-		            
-		            //PrintStream ps = new PrintStream("d:/lgjlog2017A1.txt");  
-		            //System.out.println("程序运行完毕，请查看日志");  
+		          
 		        }
 		      catch (Exception e)
 		      {  
 		            e.printStackTrace();  
-		       }  
+		     
+		      }  
 		
 	}
 	
@@ -186,8 +164,7 @@ public class DeskBootForm implements WindowListener,ActionListener,lgjEventListe
 				{
 					StartFlag++;
 					SpringStarter(Myargs);
-					//DeskSpringBootApp.xmain(Myargs);
-		        	OutMessage("启动服务成功！",0);	
+					OutMessage("启动服务成功！",0);	
 		        	
 		        	 System.out.println( " SpringApplication.runing......\n" );
 				}				
@@ -199,47 +176,6 @@ public class DeskBootForm implements WindowListener,ActionListener,lgjEventListe
 			  }
 			
 			
-        	/*
-			//if(MySpringBootServiceThread==null)
-			{
-			//	MySpringBootServiceThread=new Thread(new Runnable()
-	            {
-	                public void run()
-	                {
-	                	
-	                	//Mylatch = new CountDownLatch(1);
-	                	//SpringApplication.run(DeskSpringBootForm.class, Myargs); 
-	                	DeskSpringBootApp.SpringStarter(Myargs);
-	                	
-	                	OutMessage("启动服务成功！[8000]",0);	
-	                	
-	                	/*
-	                	try
-	                    {
-
-	                		 Mylatch.await();
-
-	                    }
-	                    catch (InterruptedException e)
-	                    {
-
-	                        e.printStackTrace();
-	               
-	                    }
-                        */
-	                  //}
-	                
-	            //});
-								
-				//MySpringBootServiceThread.start();			   
-				//OutMessage("启动服务成功！！",0);	
-			//}
-			//else
-			//{
-			
-			//	OutMessage("启动服务已经成功！！",0);	
-			
-			//}
 						
 		}
 		if(cmd.equals("close") )
@@ -259,46 +195,44 @@ public class DeskBootForm implements WindowListener,ActionListener,lgjEventListe
     	 OutMessage(String.valueOf(event.ResultCode)+"||"+event.ResultStr,1);
     	       
    
-    	 //OutMessage(String.valueOf(vispectevent.ResultCode)+", "+vispectevent.AccountID,1);
+    	 
     }
     
-  //=================================================
-    public void windowClosing(WindowEvent e)
-	  {
-    	
+ 
+     public void windowClosing(WindowEvent e)
+	  {    	
 		
-		   System.out.println("Window Closing event\n");
-		   
+		   System.out.println("Window Closing event\n");		   
 		   System.setOut(Oldout);//恢复原状
 		   System.exit(0);
 	  }
 
-	public void windowIconified(WindowEvent e)
+	  public void windowIconified(WindowEvent e)
 	   {
 		  System.out.println("WindowIconified event\n");
 	   }
 
-    public void windowActivated(WindowEvent e)
+       public void windowActivated(WindowEvent e)
         {
            System.out.println("WindowActivated event\n");
         }
 
-    public void windowOpened(WindowEvent e)
+      public void windowOpened(WindowEvent e)
         {
     	 System.out.println("windowOpened event\n");
         }
     
-    public void windowDeiconified(WindowEvent e) 
+       public void windowDeiconified(WindowEvent e) 
         { 
     	 System.out.println("windowDeiconified event\n");
         }
    
-    public void windowClosed(WindowEvent e) 
+       public void windowClosed(WindowEvent e) 
         {
     	 System.out.println("windowClosed event\n");
         }
     
-    public void windowDeactivated(WindowEvent e) 
+       public void windowDeactivated(WindowEvent e) 
         { 
     	 System.out.println("windowDeactivated event\n");
         }
