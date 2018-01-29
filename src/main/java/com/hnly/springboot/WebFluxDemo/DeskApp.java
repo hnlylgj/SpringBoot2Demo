@@ -9,11 +9,13 @@ import java.io.PrintStream;
  */
 public class DeskApp 
 {
-    public static void xmain( String[] args )
+    public static void main( String[] args )
     {
        // System.out.println( "Hello World!" );
         
-       
+    	    int id;
+    	
+            /*
     	       try
     	       {  
     	            PrintStream Oldout = System.out;  
@@ -34,6 +36,6 @@ public class DeskApp
     	            e.printStackTrace();  
     	       }  
 
-    	
+    	*/
     }
 }
